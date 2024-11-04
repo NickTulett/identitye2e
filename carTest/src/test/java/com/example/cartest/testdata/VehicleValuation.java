@@ -8,6 +8,7 @@ public class VehicleValuation {
     private int year;
     private int minValue;
     private int maxValue;
+    private int carwowValue;
 
     public VehicleValuation(String type) {
         setType(type);

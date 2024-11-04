@@ -42,6 +42,7 @@ public class CarInputParser {
     }
 
     public void createValuationsFromRegNums() {
+        // TODO: change this to parse other vehicle details
         this.getRegList();
         for (String regNum: this.regList) {
             VehicleValuation vehicleValuation = new VehicleValuation("car");
