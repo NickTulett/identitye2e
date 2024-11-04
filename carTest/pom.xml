@@ -13,7 +13,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>22</maven.compiler.target>
     <maven.compiler.source>22</maven.compiler.source>
-<junit.version>5.10.2</junit.version>  </properties>
+<junit.version>5.11.0</junit.version>  </properties>
 
   <dependencies>
     <dependency>
@@ -28,16 +28,23 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-params</artifactId>
-          <version>5.9.1</version>
-          <scope>test</scope>
-      </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+
+      <dependency>
+          <groupId>com.opencsv</groupId>
+          <artifactId>opencsv</artifactId>
+          <version>5.3</version>
+      </dependency>
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-params</artifactId>
+          <version>5.11.0</version>
+          <scope>test</scope>
+      </dependency>
+  </dependencies>
 </project>
