@@ -18,8 +18,12 @@ import java.util.regex.Pattern;
 
 public class CarFileParser {
     public List<String> allLines;
-    private static final String regMatcher = "([A-Z]{2}[0-9]{2} *[A-Z]{3})";
-    private static final Pattern regMatch = Pattern.compile(regMatcher);
+
+    private static final Pattern regMatch = Pattern.compile("([A-Z]{2}[0-9]{2} *[A-Z]{3})");
+    private static final Pattern roughValueMatch = Pattern.compile("(roughly\\D+)(\\d+)");
+    private static final Pattern notMuchMatch = Pattern.compile("not worth much");
+    private static final Pattern higherThanMatch = Pattern.compile("(higher than\\D+)(\\d+)(k)");
+
     public List<String> regLines = new ArrayList<>();
     public List<String> regList = new ArrayList<>();
     public List<VehicleValuation> valuations = new ArrayList<>();
@@ -53,6 +57,35 @@ public class CarFileParser {
             VehicleValuation vehicleValuation = new VehicleValuation("car");
             vehicleValuation.setVariantReg(regNum);
             this.valuations.add(vehicleValuation);
+        }
+    }
+
+    public void createValuationsFromCarInputFile() {
+        findRegLines();
+        for (String regLine: this.regLines) {
+            Matcher matchingReg = regMatch.matcher(regLine);
+            while (matchingReg.find()) {
+                this.regList.add(matchingReg.group(1).replaceAll("\\s", ""));
+                Matcher matchingRough = roughValueMatch.matcher(regLine);
+                Matcher matchingNotMuch = notMuchMatch.matcher(regLine);
+                Matcher matchingHigherThan = higherThanMatch.matcher(regLine);
+                String regNum = matchingReg.group(1).replaceAll("\\s", "");
+                VehicleValuation vehicleValuation = new VehicleValuation("car");
+                vehicleValuation.setVariantReg(regNum);
+                String givenValue;
+                while (matchingRough.find()) {
+                    givenValue = matchingRough.group(2);
+                    vehicleValuation.setMinValue(Double.parseDouble(givenValue) * 0.9);
+                    vehicleValuation.setMaxValue(Double.parseDouble(givenValue) * 1.1);
+                }
+                while (matchingNotMuch.find()) {
+                    vehicleValuation.setGivenValue("0");
+                }
+                while (matchingHigherThan.find()) {
+                    vehicleValuation.setMinValue(Double.parseDouble(matchingHigherThan.group(2)) * 1000);
+                }
+                this.valuations.add(vehicleValuation);
+            }
         }
     }
 

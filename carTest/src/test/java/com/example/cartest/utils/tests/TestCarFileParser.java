@@ -37,8 +37,13 @@ public class TestCarFileParser {
     }
     @Test
     void shouldCreateFourValuations() {
-        carFileParser.createValuationsFromRegNums();
+        carFileParser.createValuationsFromCarInputFile();
         assertEquals(4, carFileParser.valuations.size());
+        assertEquals("3000", carFileParser.valuations.get(0).getGivenValue());
+        assertEquals(3300, Math.floor(carFileParser.valuations.get(0).getMaxValue()));
+        assertEquals("500", carFileParser.valuations.get(1).getGivenValue());
+        assertEquals(10000, Math.floor(carFileParser.valuations.get(2).getMinValue()));
+        assertEquals(10000, Math.floor(carFileParser.valuations.get(3).getMinValue()));
     }
 
     @Test

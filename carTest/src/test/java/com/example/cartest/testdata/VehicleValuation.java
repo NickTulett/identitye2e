@@ -6,9 +6,9 @@ public class VehicleValuation {
     private String make;
     private String model;
     private String year;
-    private int minValue;
-    private int maxValue;
-    private String givenValue;
+    private double minValue = 0;
+    private double maxValue = 0;
+    private String givenValue = "0";
 
 
     public String getGivenValue() {
@@ -63,19 +63,19 @@ public class VehicleValuation {
         this.year = year;
     }
 
-    public int getMinValue() {
+    public double getMinValue() {
         return minValue;
     }
 
-    public void setMinValue(int minValue) {
+    public void setMinValue(double minValue) {
         this.minValue = minValue;
     }
 
-    public int getMaxValue() {
+    public double getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
+    public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
 }
