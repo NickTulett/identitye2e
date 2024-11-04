@@ -36,7 +36,7 @@ public class AutoTrader {
         Locator valuationButton = page.getByText("Get valuation");
         valuationButton.waitFor();
         valuationButton.click();
-        this.carValue = page.locator("[data-testid='valuation-details-container'] h2").innerText();
+        this.carValue = page.locator("[data-testid='valuation-details-container'] h2").innerText().replaceAll("\\D", "");
         this.vehicleValuation.setGivenValue(this.carValue);
     }
 }
