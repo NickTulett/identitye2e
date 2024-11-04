@@ -42,7 +42,7 @@ public class CarFileParser {
         for (String regLine: this.regLines) {
             Matcher matchingReg = regMatch.matcher(regLine);
             while (matchingReg.find()) {
-                this.regList.add(matchingReg.group(1));
+                this.regList.add(matchingReg.group(1).replaceAll("\\s", ""));
             }
         }
     }
@@ -61,10 +61,6 @@ public class CarFileParser {
                 .withType(OutputData.class)
                 .build()
                 .parse();
-//        return Files.readAllLines(outputFile)
-//                .stream()
-//                .map(line -> Arrays.asList(line.split(",")))
-//                .collect(Collectors.toList());
     }
 
 }

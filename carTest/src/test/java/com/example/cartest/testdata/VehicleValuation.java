@@ -56,7 +56,7 @@ public class VehicleValuation {
     }
 
     public String getYear() {
-        return year;
+        return year.split(" ")[1];
     }
 
     public void setYear(String year) {

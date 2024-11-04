@@ -4,14 +4,14 @@ import com.opencsv.bean.CsvBindByName;
 
 public class OutputData {
     @CsvBindByName(column = "VARIANT_REG")
-    String variantReg;
+    public String variantReg;
 
     @CsvBindByName(column = "MAKE")
-    String make;
+    public String make;
 
     @CsvBindByName(column = "MODEL")
-    String model;
+    public String model;
 
     @CsvBindByName(column = "YEAR")
-    String year;
+    public String year;
 }

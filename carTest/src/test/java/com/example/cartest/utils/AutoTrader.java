@@ -44,13 +44,14 @@ public class AutoTrader {
         this.regNumInput.press("Enter");
     }
     public void getCarDetails() {
-//        this.carDetails = page.locator("[data-testid='vehicle-details-container']").innerText();
-        this.carDetails = dummyDetails;
+        this.carDetails = page.locator("[data-testid='vehicle-details-container']", new Page.LocatorOptions()).innerText();
+//        this.carDetails = dummyDetails;
         String[] carLines = this.carDetails.split("\n");
         this.vehicleValuation = new VehicleValuation("car");
         this.vehicleValuation.setVariantReg(carLines[2]);
-        this.vehicleValuation.setMake(carLines[0]);
-        this.vehicleValuation.setModel(carLines[0]);
+        String carMake = carLines[0].split(" ")[0];
+        this.vehicleValuation.setMake(carMake.toUpperCase());
+        this.vehicleValuation.setModel(carLines[0].replace(carMake + " ", ""));
         this.vehicleValuation.setYear(carLines[16]);
 
 
