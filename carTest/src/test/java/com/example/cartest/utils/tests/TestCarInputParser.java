@@ -27,5 +27,15 @@ public class TestCarInputParser {
         System.out.println(carInputParser.regLines.toString());
         assertEquals(3, carInputParser.regLines.size());
     }
+    @Test
+    void shouldFindFourRegNums() {
+        carInputParser.getRegList();
+        assertEquals(4, carInputParser.regList.size());
+    }
+    @Test
+    void shouldCreateFourValuations() {
+        carInputParser.createValuationsFromRegNums();
+        assertEquals(4, carInputParser.valuations.size());
+    }
 
 }
