@@ -1,6 +1,6 @@
 package com.example.cartest.utils.tests;
 
-import com.example.cartest.utils.CarWow;
+import com.example.cartest.utils.AutoTrader;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class TestCarWow {
+public class TestAutotrader {
   // Shared between all tests in this class.
   static Playwright playwright;
   static Browser browser;
-  private CarWow carWow;
+  private AutoTrader autoTrader;
   static String regNum = "GJ20XDL";
-  static String expectedValue = "£13,348";
+  static String expectedValue = "£13,270";
 
   BrowserContext context;
   Page page;
@@ -35,42 +35,27 @@ public class TestCarWow {
 @BeforeEach  void useExistingContextAndPage() {
   context = browser.contexts().getLast();
   page = context.pages().getLast();
-  carWow = new CarWow(page);
+  autoTrader = new AutoTrader(page);
 }
 
 @AfterEach  void closeContext() {
     context.close();
   }
 
-  @Test
-  void shouldStartValuation() {
-    carWow.startValuation(regNum);
-    assertTrue(page.url().contains("quotes.carwow.co.uk/selling"));
-  }
-
-  @Test
-  void shouldMatchCarDetails() {
-    carWow.startValuation(regNum);
-    carWow.getCarDetails();
-    assertTrue(carWow.carDetails.contains("Kia Soul EV"));
-  }
-
-  @Test
-  void shouldMatchMileage() {
-    carWow.startValuation(regNum);
-    carWow.getCarDetails();
-    carWow.confirmCarDetails();
-    assertEquals("25000", carWow.getMileage());
-  }
 
   @Test
   void shouldMatchValue() {
-    carWow.startValuation(regNum);
-    carWow.getCarDetails();
-    carWow.confirmCarDetails(); //make, model, etc
-    carWow.confirmCarDetails(); // mileage
-    carWow.getValuation();
-    assertTrue(carWow.carValue.contains(expectedValue));
+    autoTrader.startValuation(regNum, 25000);
+    autoTrader.getCarDetails();
+    autoTrader.getValuation();
+    assertTrue(autoTrader.carValue.contains(expectedValue));
+  }
+
+  @Test
+  void testWithDummies() {
+    autoTrader.getCarDetails();
+    autoTrader.getValuation();
+    assertEquals("March 2020", autoTrader.vehicleValuation.getYear());
   }
 
 }

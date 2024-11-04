@@ -5,10 +5,19 @@ public class VehicleValuation {
     private String variantReg;
     private String make;
     private String model;
-    private int year;
+    private String year;
     private int minValue;
     private int maxValue;
-    private int carwowValue;
+    private String givenValue;
+
+
+    public String getGivenValue() {
+        return givenValue;
+    }
+
+    public void setGivenValue(String givenValue) {
+        this.givenValue = givenValue;
+    }
 
     public VehicleValuation(String type) {
         setType(type);
@@ -46,11 +55,11 @@ public class VehicleValuation {
         this.model = model;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
