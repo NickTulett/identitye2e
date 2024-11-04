@@ -6,6 +6,8 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,10 +40,6 @@ public class TestAutotrader {
   autoTrader = new AutoTrader(page);
 }
 
-@AfterEach  void closeContext() {
-    context.close();
-  }
-
 
   @Test
   void shouldMatchValue() {
@@ -57,5 +55,14 @@ public class TestAutotrader {
     autoTrader.getValuation();
     assertEquals("March 2020", autoTrader.vehicleValuation.getYear());
   }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"SG18HTN", "AD58VNF", "BW57BOF", "KT17DLX"})
+  void dataDrivenDummyTest(String regNum) {
+    autoTrader.getCarDetails();
+    autoTrader.getValuation();
+    assertEquals("March 2020", autoTrader.vehicleValuation.getYear());
+  }
+
 
 }
